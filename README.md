@@ -8,5 +8,5 @@ A API será desenvolvida utilizando Node.js
 
 1. Faça um clone desse repositório;
 2. Entre na pasta rodando `cd manutencao-agendamentos`;
-3. Rode `yarn` para instalar as dependências;
-4. Rode `yarn dev:server`.
+3. Execute `yarn` para instalar as dependências;
+4. Execute `yarn dev:server`.
