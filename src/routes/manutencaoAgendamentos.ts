@@ -1,3 +1,5 @@
+import { getCustomRepository } from 'typeorm';
+
 import { Router } from 'express';
 import { parseISO } from 'date-fns';
 
@@ -5,15 +7,14 @@ import ManutencaoAgendamentosReposirory from '../repositories/ManutencaoAgendame
 import ManutencaoAgendamentosService from '../services/ManutencaoAgendamentosService';
 
 const manutencaoAgendamentosRouter = Router();
-const manutencaoAgendamentosReposirory = new ManutencaoAgendamentosReposirory();
-const manutencaoAgendamentosService = new ManutencaoAgendamentosService(manutencaoAgendamentosReposirory);
+const manutencaoAgendamentosService = new ManutencaoAgendamentosService();
 
-manutencaoAgendamentosRouter.post('/', (request, response) => {
+manutencaoAgendamentosRouter.post('/', async (request, response) => {
     const { prestadorServico, data } = request.body;    
     const dataAgendamento = parseISO(data);
 
     try {
-        const agendamento = manutencaoAgendamentosService.registraAgendamento({ 
+        const agendamento = await manutencaoAgendamentosService.registraAgendamento({ 
             prestadorServico,
             data: dataAgendamento
         }); 
@@ -24,8 +25,9 @@ manutencaoAgendamentosRouter.post('/', (request, response) => {
     }
 });
 
-manutencaoAgendamentosRouter.get('/', (request, response) => {
-    const agendamentos = manutencaoAgendamentosReposirory.findAll();
+manutencaoAgendamentosRouter.get('/', async (request, response) => {
+    const manutencaoAgendamentosReposirory = getCustomRepository(ManutencaoAgendamentosReposirory);
+    const agendamentos = await manutencaoAgendamentosReposirory.find();
     return response.json(agendamentos);
 });
 

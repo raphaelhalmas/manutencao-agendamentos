@@ -9,9 +9,10 @@ export class Agendamento1598230015247 implements MigrationInterface {
                 columns: [
                     {
                         name: 'id',
-                        type: 'varchar',
+                        type: 'uuid',
                         isPrimary: true,
                         generationStrategy: 'uuid',
+                        default: 'uuid_generate_v4()'
                     },
                     {
                         name: 'prestadorservico',
@@ -19,7 +20,7 @@ export class Agendamento1598230015247 implements MigrationInterface {
                         isNullable: false
                     },
                     {
-                        name: 'date',
+                        name: 'data',
                         type: 'timestamp with time zone',
                         isNullable: false
                     }

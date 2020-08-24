@@ -1,11 +1,11 @@
 class AgendamentoDTO {
     id: string;    
-    barbeiro: string;    
+    prestadorServico: string;    
     data: Date;
 
-    constructor({ id, barbeiro, data }: AgendamentoDTO){
+    constructor({ id, prestadorServico, data }: AgendamentoDTO){
         this.id = id;
-        this.barbeiro = barbeiro;
+        this.prestadorServico = prestadorServico;
         this.data = data;
     }
 }
