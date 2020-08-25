@@ -1,23 +1,26 @@
 import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn } from 'typeorm';
 
-@Entity('agendamento')
-class Agendamento {
+@Entity('usuario')
+class Usuario {
     
     @PrimaryGeneratedColumn('uuid')
     id: string;
     
-    @Column({ name: 'prestadorservico' })
-    prestadorServico: string;    
-    
-    @Column('timestamp with time zone')
-    data: Date;
+    @Column()
+    nome: string;
+
+    @Column()
+    email: string;
+
+    @Column()
+    senha: string;
 
     @CreateDateColumn({ name: 'datacriacao'})
     dataCriacao: Date;
 
     @UpdateDateColumn({ name: 'dataatualizacao'})
-    dataAtualizacao: Date;    
+    dataAtualizacao: Date;
 
 }
 
-export default Agendamento;
+export default Usuario;

@@ -1,6 +1,6 @@
-import { MigrationInterface, QueryRunner, Table} from "typeorm";
+import { MigrationInterface, QueryRunner, Table } from "typeorm";
 
-export class Agendamento1598230015247 implements MigrationInterface {
+export class Agendamento1598314100303 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.createTable(
@@ -16,14 +16,22 @@ export class Agendamento1598230015247 implements MigrationInterface {
                     },
                     {
                         name: 'prestadorservico',
-                        type: 'varchar',
-                        isNullable: false
+                        type: 'varchar'
                     },
                     {
                         name: 'data',
-                        type: 'timestamp with time zone',
-                        isNullable: false
-                    }
+                        type: 'timestamp with time zone'
+                    },
+                    {
+                        name: 'datacriacao',
+                        type: 'timestamp',
+                        default: 'now()'
+                    },
+                    {
+                        name: 'dataatualizacao',
+                        type: 'timestamp',
+                        default: 'now()'
+                    }                    
                 ]
             })
         );
@@ -31,6 +39,6 @@ export class Agendamento1598230015247 implements MigrationInterface {
 
     public async down(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.dropTable('agendamento');
-    }
+    }    
 
 }
