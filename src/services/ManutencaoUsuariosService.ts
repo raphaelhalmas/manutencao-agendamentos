@@ -1,4 +1,5 @@
 import { getRepository } from 'typeorm';
+import { hash } from 'bcryptjs';
 import Usuario from '../models/Usuario';
 
 interface Request {
@@ -9,7 +10,7 @@ interface Request {
 
 class ManutencaoUsuariosService {
 
-    public async registraUsuario({ nome, email, senha }: Request): Promise<Usuario> {
+    public async registraUsuario({ nome, email, senha }: Request): Promise<Usuario | null> {
         const manutencaoUsuariosReposirory = getRepository(Usuario);
 
         const usuarioJaCadastrado = await manutencaoUsuariosReposirory.findOne({
@@ -20,10 +21,12 @@ class ManutencaoUsuariosService {
             throw new Error('Email ja utilizado');
         }
     
+        const senhaCriptografada = await hash(senha, 8);
+
         const usuario = manutencaoUsuariosReposirory.create({ 
             nome,
             email,
-            senha 
+            senha: senhaCriptografada 
         });
 
         await manutencaoUsuariosReposirory.save(usuario);

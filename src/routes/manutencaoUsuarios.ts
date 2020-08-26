@@ -3,11 +3,10 @@ import { Router } from 'express';
 import ManutencaoUsuariosService from '../services/ManutencaoUsuariosService'
 
 const manutencaoUsuariosRouter = Router();
+const manutencaoUsuariosService = new ManutencaoUsuariosService();
 
 manutencaoUsuariosRouter.post('/', async (request, response) => {
     const { nome, email, senha } = request.body;    
-
-    const manutencaoUsuariosService = new ManutencaoUsuariosService();
 
     try {
         const usuario = await manutencaoUsuariosService.registraUsuario({
@@ -15,6 +14,8 @@ manutencaoUsuariosRouter.post('/', async (request, response) => {
             email,
             senha
         });
+
+        delete usuario.senha;
         
         return response.json(usuario);
     }

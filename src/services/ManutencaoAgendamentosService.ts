@@ -10,7 +10,7 @@ interface Request {
 
 class ManutencaoAgendamentosService {
 
-    public async registraAgendamento({ prestadorServicoId, dataAgendamento }: Request): Promise<Agendamento> {
+    public async registraAgendamento({ prestadorServicoId, dataAgendamento }: Request): Promise<Agendamento | null> {
         const manutencaoAgendamentosReposirory = getCustomRepository(ManutencaoAgendamentosReposirory);
 
         const dataHora = startOfHour(dataAgendamento);
