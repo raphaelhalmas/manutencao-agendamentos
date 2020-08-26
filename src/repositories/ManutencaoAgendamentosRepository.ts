@@ -4,9 +4,9 @@ import Agendamento from '../models/Agendamento';
 @EntityRepository(Agendamento)
 class ManutencaoAgendamentosRepository extends Repository<Agendamento> {
 
-    public async findByData(data: Date): Promise<Agendamento | null> {
+    public async findByData(dataAgendamento: Date): Promise<Agendamento | null> {
         const agendamento = await this.findOne({
-            where: { data }
+            where: { dataAgendamento }
         });
         
         return agendamento || null;

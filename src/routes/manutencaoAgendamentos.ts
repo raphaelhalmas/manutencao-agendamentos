@@ -10,17 +10,17 @@ const manutencaoAgendamentosRouter = Router();
 const manutencaoAgendamentosService = new ManutencaoAgendamentosService();
 
 manutencaoAgendamentosRouter.post('/', async (request, response) => {
-    const { prestadorServico, data } = request.body;    
-    const dataAgendamento = parseISO(data);
+    const { prestadorServicoId, dataAgendamento } = request.body;    
 
     try {
         const agendamento = await manutencaoAgendamentosService.registraAgendamento({ 
-            prestadorServico,
-            data: dataAgendamento
+            prestadorServicoId,
+            dataAgendamento: parseISO(dataAgendamento)
         }); 
 
         return response.json(agendamento);
-    } catch (error) {
+    } 
+    catch (error) {
         return response.status(400).json({ message: error.message });
     }
 });

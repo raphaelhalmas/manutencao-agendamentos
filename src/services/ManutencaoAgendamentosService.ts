@@ -3,21 +3,26 @@ import Agendamento from '../models/Agendamento';
 import ManutencaoAgendamentosReposirory from '../repositories/ManutencaoAgendamentosRepository';
 import { startOfHour } from 'date-fns';
 
+interface Request {
+    prestadorServicoId: string; 
+    dataAgendamento: Date;
+}
+
 class ManutencaoAgendamentosService {
 
-    public async registraAgendamento({ prestadorServico, data }: Omit<Agendamento, 'id'>): Promise<Agendamento | null> {
+    public async registraAgendamento({ prestadorServicoId, dataAgendamento }: Request): Promise<Agendamento> {
         const manutencaoAgendamentosReposirory = getCustomRepository(ManutencaoAgendamentosReposirory);
 
-        const dataHora = startOfHour(data);
+        const dataHora = startOfHour(dataAgendamento);
         const agendamentoJaRegistrado = await manutencaoAgendamentosReposirory.findByData(dataHora);
     
         if (agendamentoJaRegistrado) {
             throw Error('Horario ja agendado');
         }
-    
+
         const agendamento = manutencaoAgendamentosReposirory.create({ 
-            prestadorServico,
-            data: dataHora 
+            prestadorServicoId,
+            dataAgendamento: dataHora 
         });
 
         await manutencaoAgendamentosReposirory.save(agendamento);

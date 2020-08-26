@@ -1,6 +1,6 @@
-import { MigrationInterface, QueryRunner, Table } from "typeorm";
+import { MigrationInterface, QueryRunner, Table, TableForeignKey } from "typeorm";
 
-export class Agendamento1598314100303 implements MigrationInterface {
+export class CriaTabelaAgendamento1598396835356 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.createTable(
@@ -15,11 +15,12 @@ export class Agendamento1598314100303 implements MigrationInterface {
                         default: 'uuid_generate_v4()'
                     },
                     {
-                        name: 'prestadorservico',
-                        type: 'varchar'
+                        name: 'prestadorservico_id',
+                        type: 'uuid',
+                        isNullable: true
                     },
                     {
-                        name: 'data',
+                        name: 'dataagendamento',
                         type: 'timestamp with time zone'
                     },
                     {
@@ -35,10 +36,23 @@ export class Agendamento1598314100303 implements MigrationInterface {
                 ]
             })
         );
+
+        await queryRunner.createForeignKey(
+            'agendamento',
+            new TableForeignKey({
+              name: 'usuario',
+              columnNames: ['prestadorservico_id'],
+              referencedColumnNames: ['id'],
+              referencedTableName: 'usuario',
+              onDelete: 'SET NULL',
+              onUpdate: 'CASCADE',
+            }),
+        );        
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
+        await queryRunner.dropForeignKey('agendamento', 'usuario');
         await queryRunner.dropTable('agendamento');
-    }    
+    }
 
 }

@@ -1,4 +1,11 @@
-import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn } from 'typeorm';
+import { 
+    Entity, 
+    Column, 
+    PrimaryGeneratedColumn,
+    OneToMany,
+    CreateDateColumn, UpdateDateColumn } from 'typeorm';
+
+import Agendamento from './Agendamento';
 
 @Entity('usuario')
 class Usuario {
@@ -6,6 +13,9 @@ class Usuario {
     @PrimaryGeneratedColumn('uuid')
     id: string;
     
+    @OneToMany(() => Agendamento, agendamento => agendamento.prestadorServico)
+    agendamento: Agendamento;
+
     @Column()
     nome: string;
 
