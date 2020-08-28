@@ -1,16 +1,17 @@
 import { getCustomRepository } from 'typeorm';
-import Agendamento from '../models/Agendamento';
-import ManutencaoAgendamentosReposirory from '../repositories/ManutencaoAgendamentosRepository';
 import { startOfHour } from 'date-fns';
 
-interface Request {
+import Agendamento from '../models/Agendamento';
+import ManutencaoAgendamentosReposirory from '../repositories/ManutencaoAgendamentosRepository';
+
+interface IRequest {
     prestadorServicoId: string; 
     dataAgendamento: Date;
 }
 
 class ManutencaoAgendamentosService {
 
-    public async registraAgendamento({ prestadorServicoId, dataAgendamento }: Request): Promise<Agendamento | null> {
+    public async registraAgendamento({ prestadorServicoId, dataAgendamento }: IRequest): Promise<Agendamento> {
         const manutencaoAgendamentosReposirory = getCustomRepository(ManutencaoAgendamentosReposirory);
 
         const dataHora = startOfHour(dataAgendamento);

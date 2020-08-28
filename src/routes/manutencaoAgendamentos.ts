@@ -6,12 +6,12 @@ import { parseISO } from 'date-fns';
 import ManutencaoAgendamentosReposirory from '../repositories/ManutencaoAgendamentosRepository';
 import ManutencaoAgendamentosService from '../services/ManutencaoAgendamentosService';
 
-import autorizaRequisicao from '../middlewares/autorizaRequisicao';
+// import autorizaRequisicao from '../middlewares/autorizaRequisicao';
 
 const manutencaoAgendamentosRouter = Router();
 const manutencaoAgendamentosService = new ManutencaoAgendamentosService();
 
-manutencaoAgendamentosRouter.use(autorizaRequisicao);
+// manutencaoAgendamentosRouter.use(autorizaRequisicao);
 
 manutencaoAgendamentosRouter.post('/', async (request, response) => {
     const { prestadorServicoId, dataAgendamento } = request.body;    

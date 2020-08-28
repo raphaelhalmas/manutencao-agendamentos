@@ -1,8 +1,9 @@
 import { getRepository } from 'typeorm';
 import { hash } from 'bcryptjs';
+
 import Usuario from '../models/Usuario';
 
-interface Request {
+interface IRequest {
     nome: string;
     email: string;
     senha: string;
@@ -10,7 +11,7 @@ interface Request {
 
 class ManutencaoUsuariosService {
 
-    public async registraUsuario({ nome, email, senha }: Request): Promise<Usuario | null> {
+    public async registraUsuario({ nome, email, senha }: IRequest): Promise<Usuario> {
         const manutencaoUsuariosReposirory = getRepository(Usuario);
 
         const usuarioJaCadastrado = await manutencaoUsuariosReposirory.findOne({

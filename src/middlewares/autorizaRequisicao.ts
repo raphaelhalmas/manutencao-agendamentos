@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 
-import autenticacaoProperties from '../config/autenticacaoProperties';
+// import authConfig from '../config/auth';
 import { verify } from 'jsonwebtoken';
 
 export default function autorizaRequisicao(
@@ -16,8 +16,8 @@ export default function autorizaRequisicao(
         const [, token ] = autorizacao.split(' ');
 
         try {
-            const decodedToken = verify(token, 
-                autenticacaoProperties.tokenJWT.secretOrPrivateKey);                
+            // const decodedToken = verify(token, 
+            //     authConfig.secretOrPrivateKey);                
 
             return next();
         } 

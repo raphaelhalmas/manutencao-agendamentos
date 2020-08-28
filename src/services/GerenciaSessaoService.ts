@@ -1,23 +1,22 @@
 import { getRepository, useContainer } from 'typeorm';
 import { compare } from 'bcryptjs';
 import { sign } from 'jsonwebtoken';
-import autenticacaoProperties from '../config/autenticacaoProperties';
 
 import Usuario from '../models/Usuario';
 
-interface Request {
+interface IRequest {
     email: string;
     senha: string;
 }
 
-interface Response {    
+interface IResponse {
     usuario: Usuario;
     token: string;
 }
 
 class GerenciaSessaoService {
 
-    public async autenticaUsuario({ email, senha }: Request): Promise<Response> {
+    public async autenticaUsuario({ email, senha }: IRequest): Promise<IResponse> {
         const manutencaoUsuariosReposirory = getRepository(Usuario);
 
         const usuario = await manutencaoUsuariosReposirory.findOne({
@@ -34,17 +33,15 @@ class GerenciaSessaoService {
             throw new Error('Usuario e/ou senha invalidos');
         }
 
-        const { secretOrPrivateKey, expiresIn } = autenticacaoProperties.tokenJWT;
-
-        const token = sign({}, secretOrPrivateKey, { 
+        const token = sign({}, 'bb757a278f392d128cf1157019d3d936', { 
             subject: usuario.id,
-            expiresIn
-        });
+            expiresIn: '1d'
+        });        
 
-        return { 
+        return {
             usuario,
             token
-         };
+        };
     }
 
 }
