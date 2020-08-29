@@ -1,27 +1,22 @@
 import { Request, Response, NextFunction } from 'express';
-
-// import authConfig from '../config/auth';
 import { verify } from 'jsonwebtoken';
 
 export default function autorizaRequisicao(
-    request: Request, 
-    response: Response, 
-    next: NextFunction): void {
-        const autorizacao = request.headers.authorization;
+    request: Request, response: Response, next: NextFunction): void {
 
-        if (!autorizacao) {
-            throw new Error('O token JWT nao foi enviado');
-        }
+    const autorizacao = request.headers.authorization;
 
-        const [, token ] = autorizacao.split(' ');
+    if (!autorizacao) {
+        throw new Error('O token JWT nao foi enviado');
+    }
 
-        try {
-            // const decodedToken = verify(token, 
-            //     authConfig.secretOrPrivateKey);                
+    const [, token ] = autorizacao.split(' ');
 
-            return next();
-        } 
-        catch (error) {
-            throw new Error('Token JWT invalido');
-        }
+    try {
+        const decodedToken = verify(token, 'bb757a278f392d128cf1157019d3d936');
+        return next();
+    } 
+    catch (error) {
+        throw new Error('Token JWT invalido');
+    }
 }
