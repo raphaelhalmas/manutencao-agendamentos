@@ -3,10 +3,10 @@ import { getCustomRepository } from 'typeorm';
 import { Router } from 'express';
 import { parseISO } from 'date-fns';
 
+import autorizaRequisicao from '../middlewares/autorizaRequisicao';
+
 import ManutencaoAgendamentosReposirory from '../repositories/ManutencaoAgendamentosRepository';
 import ManutencaoAgendamentosService from '../services/ManutencaoAgendamentosService';
-
-import autorizaRequisicao from '../middlewares/autorizaRequisicao';
 
 const manutencaoAgendamentosRouter = Router();
 const manutencaoAgendamentosService = new ManutencaoAgendamentosService();

@@ -26,7 +26,12 @@ export class CriaTabelaUsuario1598396454269 implements MigrationInterface {
                     {
                         name: 'senha',
                         type: 'varchar'
-                    },                    
+                    },
+                    {
+                        name: 'avatar',
+                        type: 'varchar',
+                        isNullable: true
+                    },
                     {
                         name: 'datacriacao',
                         type: 'timestamp',
