@@ -1,13 +1,13 @@
 import { Router } from 'express';
 
-import gerenciamentoSessaoRouter from './gerenciamentoSessao';
-import manutencaoUsuariosRouter from './manutencaoUsuarios';
-import manutencaoAgendamentosRouter from './manutencaoAgendamentos';
+import gerenciamentoSessaoRouter from './auth';
+import manutencaoUsuariosRouter from './usuarios';
+import manutencaoAgendamentosRouter from './agendamentos';
 
 const routes = Router();
 
-routes.use('/gerenciamentoSessao', gerenciamentoSessaoRouter);
-routes.use('/manutencaoUsuarios', manutencaoUsuariosRouter);
-routes.use('/manutencaoAgendamentos', manutencaoAgendamentosRouter);
+routes.use('/token', gerenciamentoSessaoRouter);
+routes.use('/usuarios', manutencaoUsuariosRouter);
+routes.use('/agendamentos', manutencaoAgendamentosRouter);
 
 export default routes;
