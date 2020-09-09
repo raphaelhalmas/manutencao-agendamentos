@@ -1,9 +1,3 @@
-// import app from './app';
-
-// app.listen(3333, () => {
-//   console.log('Aplicacao iniciada...');
-// });
-
 import setupApp from './app';
 const port = 3333;
 
