@@ -1,5 +1,21 @@
-import app from './app';
+// import app from './app';
 
-app.listen(3333, () => {
-  console.log('Aplicacao iniciada...');
-});
+// app.listen(3333, () => {
+//   console.log('Aplicacao iniciada...');
+// });
+
+import setupApp from './app';
+const port = 3333;
+
+(async () => {
+  try {
+    const app = await setupApp();
+    const server = app.listen(port, () =>
+      console.info(`Aplicacao iniciada na porta ${port}`)
+    );
+  } 
+  catch (error) {
+    console.error(error);
+    process.exit(1);
+  }
+})();
