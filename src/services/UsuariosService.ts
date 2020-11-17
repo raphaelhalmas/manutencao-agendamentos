@@ -9,12 +9,12 @@ interface IRequest {
     senha: string;
 }
 
-class ManutencaoUsuariosService {
+class UsuariosService {
 
     public async registraUsuario({ nome, email, senha }: IRequest): Promise<Usuario> {
-        const manutencaoUsuariosReposirory = getRepository(Usuario);
+        const usuariosReposirory = getRepository(Usuario);
 
-        const usuarioJaCadastrado = await manutencaoUsuariosReposirory.findOne({
+        const usuarioJaCadastrado = await usuariosReposirory.findOne({
             where: { email }
         });
     
@@ -24,17 +24,17 @@ class ManutencaoUsuariosService {
     
         const senhaCriptografada = await hash(senha, 8);
 
-        const usuario = manutencaoUsuariosReposirory.create({ 
+        const usuario = usuariosReposirory.create({ 
             nome,
             email,
             senha: senhaCriptografada 
         });
 
-        await manutencaoUsuariosReposirory.save(usuario);
+        await usuariosReposirory.save(usuario);
         
         return usuario;
     }
 
 }
 
-export default ManutencaoUsuariosService;
+export default UsuariosService;

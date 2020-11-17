@@ -4,19 +4,19 @@ import uploadConfig from '../config/upload';
 
 // import autorizaRequisicao from '../middlewares/autorizaRequisicao';
 
-import ManutencaoUsuariosService from '../services/UsuariosService'
+import UsuariosService from '../services/UsuariosService'
 
-const manutencaoUsuariosRouter = Router();
+const usuariosRouter = Router();
 
 const upload = multer(uploadConfig);
 
-manutencaoUsuariosRouter.post('/', async (request, response) => {
+usuariosRouter.post('/', async (request, response) => {
     const { nome, email, senha } = request.body;    
 
     try {
-        const manutencaoUsuariosService = new ManutencaoUsuariosService();
+        const usuariosService = new UsuariosService();
 
-        const usuario = await manutencaoUsuariosService.registraUsuario({
+        const usuario = await usuariosService.registraUsuario({
             nome,
             email,
             senha
@@ -31,9 +31,9 @@ manutencaoUsuariosRouter.post('/', async (request, response) => {
     }
 });
 
-// manutencaoUsuariosRouter.patch('/avatar', 
+// usuariosRouter.patch('/avatar', 
 //     autorizaRequisicao, upload.single('avatar'), async (request, response) => {
 //     return response.json({ message: 'I need TP for my bunghole' });
 // });
 
-export default manutencaoUsuariosRouter;
+export default usuariosRouter;

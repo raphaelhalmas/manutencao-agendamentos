@@ -17,9 +17,9 @@ interface IResponse {
 class GerenciaSessaoService {
 
     public async autenticaUsuario({ email, senha }: IRequest): Promise<IResponse> {
-        const manutencaoUsuariosReposirory = getRepository(Usuario);
+        const usuariosReposirory = getRepository(Usuario);
 
-        const usuario = await manutencaoUsuariosReposirory.findOne({
+        const usuario = await usuariosReposirory.findOne({
             where: { email }
         });
     
