@@ -2,35 +2,35 @@ import { getCustomRepository } from 'typeorm';
 import { startOfHour } from 'date-fns';
 
 import Agendamento from '../models/Agendamento';
-import ManutencaoAgendamentosReposirory from '../repositories/ManutencaoAgendamentosRepository';
+import AgendamentosRepository from '../repositories/AgendamentosRepository';
 
 interface IRequest {
     prestadorServicoId: string; 
     dataAgendamento: Date;
 }
 
-class ManutencaoAgendamentosService {
+class AgendamentosService {
 
     public async registraAgendamento({ prestadorServicoId, dataAgendamento }: IRequest): Promise<Agendamento> {
-        const manutencaoAgendamentosReposirory = getCustomRepository(ManutencaoAgendamentosReposirory);
+        const agendamentosRepository = getCustomRepository(AgendamentosRepository);
 
         const dataHora = startOfHour(dataAgendamento);
-        const agendamentoJaRegistrado = await manutencaoAgendamentosReposirory.findByData(dataHora);
+        const agendamentoJaRegistrado = await agendamentosRepository.findByData(dataHora);
     
         if (agendamentoJaRegistrado) {
             throw Error('Horario ja agendado');
         }
 
-        const agendamento = manutencaoAgendamentosReposirory.create({ 
+        const agendamento = agendamentosRepository.create({ 
             prestadorServicoId,
             dataAgendamento: dataHora 
         });
 
-        await manutencaoAgendamentosReposirory.save(agendamento);
+        await agendamentosRepository.save(agendamento);
         
         return agendamento;
     }
 
 }
 
-export default ManutencaoAgendamentosService;
+export default AgendamentosService;

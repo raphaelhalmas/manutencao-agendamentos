@@ -4,7 +4,7 @@ import uploadConfig from '../config/upload';
 
 // import autorizaRequisicao from '../middlewares/autorizaRequisicao';
 
-import ManutencaoUsuariosService from '../services/ManutencaoUsuariosService'
+import ManutencaoUsuariosService from '../services/UsuariosService'
 
 const manutencaoUsuariosRouter = Router();
 

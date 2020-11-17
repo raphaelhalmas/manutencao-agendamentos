@@ -3,22 +3,22 @@ import { getCustomRepository } from 'typeorm';
 import { Router } from 'express';
 import { parseISO } from 'date-fns';
 
-import ManutencaoAgendamentosReposirory from '../repositories/ManutencaoAgendamentosRepository';
-import ManutencaoAgendamentosService from '../services/ManutencaoAgendamentosService';
+import AgendamentosReposirory from '../repositories/AgendamentosRepository';
+import AgendamentosService from '../services/AgendamentosService';
 
 import autorizaRequisicao from '../middlewares/autorizaRequisicao';
 
-const manutencaoAgendamentosRouter = Router();
+const agendamentosRouter = Router();
 
-// manutencaoAgendamentosRouter.use(autorizaRequisicao);
+// agendamentosRouter.use(autorizaRequisicao);
 
-manutencaoAgendamentosRouter.post('/', async (request, response) => {
+agendamentosRouter.post('/', async (request, response) => {
     const { prestadorServicoId, dataAgendamento } = request.body;        
 
     try {
-        const manutencaoAgendamentosService = new ManutencaoAgendamentosService();
+        const agendamentosService = new AgendamentosService();
 
-        const agendamento = await manutencaoAgendamentosService.registraAgendamento({ 
+        const agendamento = await agendamentosService.registraAgendamento({ 
             prestadorServicoId,
             dataAgendamento: parseISO(dataAgendamento)
         }); 
@@ -30,10 +30,10 @@ manutencaoAgendamentosRouter.post('/', async (request, response) => {
     }
 });
 
-manutencaoAgendamentosRouter.get('/', async (request, response) => {
-    const manutencaoAgendamentosReposirory = getCustomRepository(ManutencaoAgendamentosReposirory);
-    const agendamentos = await manutencaoAgendamentosReposirory.find();
+agendamentosRouter.get('/', async (request, response) => {
+    const agendamentosReposirory = getCustomRepository(AgendamentosReposirory);
+    const agendamentos = await agendamentosReposirory.find();
     return response.json(agendamentos);
 });
 
-export default manutencaoAgendamentosRouter;
+export default agendamentosRouter;
