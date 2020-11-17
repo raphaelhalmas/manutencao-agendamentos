@@ -10,26 +10,26 @@ const manutencaoUsuariosRouter = Router();
 
 const upload = multer(uploadConfig);
 
-// manutencaoUsuariosRouter.post('/', async (request, response) => {
-//     const { nome, email, senha } = request.body;    
+manutencaoUsuariosRouter.post('/', async (request, response) => {
+    const { nome, email, senha } = request.body;    
 
-//     try {
-//         const manutencaoUsuariosService = new ManutencaoUsuariosService();
+    try {
+        const manutencaoUsuariosService = new ManutencaoUsuariosService();
 
-//         const usuario = await manutencaoUsuariosService.registraUsuario({
-//             nome,
-//             email,
-//             senha
-//         });
+        const usuario = await manutencaoUsuariosService.registraUsuario({
+            nome,
+            email,
+            senha
+        });
 
-//         delete usuario.senha;
+        // delete usuario.senha;
         
-//         return response.json(usuario);
-//     }
-//     catch (error) {
-//         return response.status(400).json({ message: error.message });
-//     }
-// });
+        return response.json(usuario);
+    }
+    catch (error) {
+        return response.status(400).json({ message: error.message });
+    }
+});
 
 // manutencaoUsuariosRouter.patch('/avatar', 
 //     autorizaRequisicao, upload.single('avatar'), async (request, response) => {

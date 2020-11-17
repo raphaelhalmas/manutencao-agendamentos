@@ -8,7 +8,7 @@ export default async (name = 'default'): Promise<Connection> => {
             type: "postgres",
             host: "localhost",
             port: 5432,
-            username: "docker",
+            username: "postgres",
             password: "docker",
             database: "gostack_gobarber"
         })
