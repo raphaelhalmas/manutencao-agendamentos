@@ -14,7 +14,7 @@ interface IResponse {
     token: string;
 }
 
-class GerenciaSessaoService {
+class SessaoService {
 
     public async autenticaUsuario({ email, senha }: IRequest): Promise<IResponse> {
         const usuariosReposirory = getRepository(Usuario);
@@ -46,4 +46,4 @@ class GerenciaSessaoService {
 
 }
 
-export default GerenciaSessaoService;
+export default SessaoService;

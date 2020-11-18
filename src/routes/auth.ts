@@ -1,23 +1,23 @@
 import { Router } from 'express';
 
-import GerenciaSessaoService from '../services/GerenciaSessaoService'
+import SessaoService from '../services/SessaoService'
 
-const gerenciamentoSessaoRouter = Router();
+const sessaoRouter = Router();
 
-// gerenciamentoSessaoRouter.post('/', async (request, response) => {
+// sessaoRouter.post('/', async (request, response) => {
 //     const { email, senha } = request.body;
 
 //     try {
-//         const gerenciaSessaoService = new GerenciaSessaoService();
+//         const sessaoService = new SessaoService();
 
-//         const { usuario, token } = await gerenciaSessaoService.autenticaUsuario({ 
+//         const { usuario, token } = await sessaoService.autenticaUsuario({ 
 //             email, 
 //             senha
 //         });
 
-//         if (usuario) {
-//             delete usuario.senha;
-//         }
+//         // if (usuario) {
+//         //     delete usuario.senha;
+//         // }
 
 //         return response.json({ usuario, token });
 //     }
@@ -26,4 +26,4 @@ const gerenciamentoSessaoRouter = Router();
 //     }
 // });
 
-export default gerenciamentoSessaoRouter;
+export default sessaoRouter;
