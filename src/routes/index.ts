@@ -1,13 +1,13 @@
 import { Router } from 'express';
 
-import sessaoRouter from './auth';
-import usuariosRouter from './usuarios';
-import agendamentosRouter from './agendamentos';
+import sessaoRoute from './auth';
+import usuariosRoute from './usuarios';
+import agendamentosRoute from './agendamentos';
 
-const routes = Router();
+const router = Router();
 
-routes.use('/token', sessaoRouter);
-routes.use('/usuarios', usuariosRouter);
-routes.use('/agendamentos', agendamentosRouter);
+router.use('/token', sessaoRoute);
+router.use('/usuarios', usuariosRoute);
+router.use('/agendamentos', agendamentosRoute);
 
-export default routes;
+export default router;

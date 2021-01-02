@@ -12,9 +12,9 @@ interface IRequest {
 class UsuariosService {
 
     public async registraUsuario({ nome, email, senha }: IRequest): Promise<Usuario> {
-        const usuariosReposirory = getRepository(Usuario);
+        const usuariosRepository = getRepository(Usuario);
 
-        const usuarioJaCadastrado = await usuariosReposirory.findOne({
+        const usuarioJaCadastrado = await usuariosRepository.findOne({
             where: { email }
         });
     
@@ -24,13 +24,13 @@ class UsuariosService {
     
         const senhaCriptografada = await hash(senha, 8);
 
-        const usuario = usuariosReposirory.create({ 
+        const usuario = usuariosRepository.create({ 
             nome,
             email,
             senha: senhaCriptografada 
         });
 
-        await usuariosReposirory.save(usuario);
+        await usuariosRepository.save(usuario);
         
         return usuario;
     }
