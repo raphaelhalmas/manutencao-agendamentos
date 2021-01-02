@@ -10,7 +10,7 @@ import autorizaRequisicao from '../middlewares/autorizaRequisicao';
 
 const agendamentosRouter = Router();
 
-// agendamentosRouter.use(autorizaRequisicao);
+agendamentosRouter.use(autorizaRequisicao);
 
 agendamentosRouter.post('/', async (request, response) => {
     const { prestadorServicoId, dataAgendamento } = request.body;        
@@ -31,8 +31,8 @@ agendamentosRouter.post('/', async (request, response) => {
 });
 
 agendamentosRouter.get('/', async (request, response) => {
-    const agendamentosReposirory = getCustomRepository(AgendamentosReposirory);
-    const agendamentos = await agendamentosReposirory.find();
+    const agendamentosRepository = getCustomRepository(AgendamentosReposirory);
+    const agendamentos = await agendamentosRepository.find();
     return response.json(agendamentos);
 });
 
