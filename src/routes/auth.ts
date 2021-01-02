@@ -15,11 +15,15 @@ sessaoRouter.post('/', async (request, response) => {
             senha
         });
 
-        // if (usuario) {
-        //     delete usuario.senha;
-        // }
+        const dadosUsuario = {
+            id: usuario.id,
+            nome: usuario.nome,
+            email: usuario.email,
+            dataCriacao: usuario.dataCriacao,
+            dataAtualizacao: usuario.dataAtualizacao,
+        };
 
-        return response.json({ usuario, token });
+        return response.json({ dadosUsuario, token });
     }
     catch (error) {
         return response.status(400).json({ message: error.message });

@@ -22,9 +22,15 @@ usuariosRouter.post('/', async (request, response) => {
             senha
         });
 
-        // delete usuario.senha;
+        const dadosUsuario = {
+            id: usuario.id,
+            nome: usuario.nome,
+            email: usuario.email,
+            dataCriacao: usuario.dataCriacao,
+            dataAtualizacao: usuario.dataAtualizacao,
+        };
         
-        return response.json(usuario);
+        return response.json(dadosUsuario);
     }
     catch (error) {
         return response.status(400).json({ message: error.message });
