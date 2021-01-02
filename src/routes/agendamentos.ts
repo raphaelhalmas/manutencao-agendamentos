@@ -15,19 +15,14 @@ agendamentosRouter.use(autorizaRequisicao);
 agendamentosRouter.post('/', async (request, response) => {
     const { prestadorServicoId, dataAgendamento } = request.body;        
 
-    try {
-        const agendamentosService = new AgendamentosService();
+    const agendamentosService = new AgendamentosService();
 
-        const agendamento = await agendamentosService.registraAgendamento({ 
-            prestadorServicoId,
-            dataAgendamento: parseISO(dataAgendamento)
-        }); 
+    const agendamento = await agendamentosService.registraAgendamento({ 
+        prestadorServicoId,
+        dataAgendamento: parseISO(dataAgendamento)
+    }); 
 
-        return response.json(agendamento);
-    } 
-    catch (error) {
-        return response.status(400).json({ message: error.message });
-    }
+    return response.json(agendamento);
 });
 
 agendamentosRouter.get('/', async (request, response) => {

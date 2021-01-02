@@ -13,28 +13,23 @@ const upload = multer(uploadConfig);
 usuariosRouter.post('/', async (request, response) => {
     const { nome, email, senha } = request.body;    
 
-    try {
-        const usuariosService = new UsuariosService();
+    const usuariosService = new UsuariosService();
 
-        const usuario = await usuariosService.registraUsuario({
-            nome,
-            email,
-            senha
-        });
+    const usuario = await usuariosService.registraUsuario({
+        nome,
+        email,
+        senha
+    });
 
-        const dadosUsuario = {
-            id: usuario.id,
-            nome: usuario.nome,
-            email: usuario.email,
-            dataCriacao: usuario.dataCriacao,
-            dataAtualizacao: usuario.dataAtualizacao,
-        };
-        
-        return response.json(dadosUsuario);
-    }
-    catch (error) {
-        return response.status(400).json({ message: error.message });
-    }
+    const dadosUsuario = {
+        id: usuario.id,
+        nome: usuario.nome,
+        email: usuario.email,
+        dataCriacao: usuario.dataCriacao,
+        dataAtualizacao: usuario.dataAtualizacao,
+    };
+    
+    return response.json(dadosUsuario);
 });
 
 // usuariosRouter.patch('/avatar', 

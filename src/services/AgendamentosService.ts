@@ -1,6 +1,8 @@
 import { getCustomRepository } from 'typeorm';
 import { startOfHour } from 'date-fns';
 
+import ResponseStatusException from '../errors/ResponseStatusException';
+
 import Agendamento from '../models/Agendamento';
 import AgendamentosRepository from '../repositories/AgendamentosRepository';
 
@@ -18,7 +20,7 @@ class AgendamentosService {
         const agendamentoJaRegistrado = await agendamentosRepository.findByData(dataHora);
     
         if (agendamentoJaRegistrado) {
-            throw Error('Horario ja agendado');
+            throw new ResponseStatusException('Horario ja agendado');
         }
 
         const agendamento = agendamentosRepository.create({ 

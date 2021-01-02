@@ -1,6 +1,8 @@
 import { Request, Response, NextFunction } from 'express';
 import { verify } from 'jsonwebtoken';
 
+import ResponseStatusException from '../errors/ResponseStatusException';
+
 interface ITokenPayload {
     iat: number;
     ext: number;
@@ -13,7 +15,7 @@ export default function autorizaRequisicao(
     const autorizacao = request.headers.authorization;
 
     if (!autorizacao) {
-        throw new Error('O token JWT nao foi enviado');
+        throw new ResponseStatusException('O token JWT nao foi enviado', 401);
     }
 
     const [, token ] = autorizacao.split(' ');
@@ -29,6 +31,6 @@ export default function autorizaRequisicao(
         return next();
     } 
     catch (error) {
-        throw new Error('Token JWT invalido');
+        throw new ResponseStatusException('Token JWT invalido', 401);
     }
 }

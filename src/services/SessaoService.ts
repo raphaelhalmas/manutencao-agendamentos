@@ -2,6 +2,8 @@ import { getRepository, useContainer } from 'typeorm';
 import { compare } from 'bcryptjs';
 import { sign } from 'jsonwebtoken';
 
+import ResponseStatusException from '../errors/ResponseStatusException';
+
 import Usuario from '../models/Usuario';
 
 interface IRequest {
@@ -24,13 +26,13 @@ class SessaoService {
         });
     
         if (!usuario) {
-            throw new Error('Usuario e/ou senha invalidos');
+            throw new ResponseStatusException('Usuario e/ou senha invalidos', 401);
         }
     
         const senhaValida = await compare(senha, usuario.senha);
         
         if (!senhaValida) {
-            throw new Error('Usuario e/ou senha invalidos');
+            throw new ResponseStatusException('Usuario e/ou senha invalidos', 401);
         }
 
         const token = sign({}, 'bb757a278f392d128cf1157019d3d936', { 

@@ -1,6 +1,8 @@
 import { getRepository } from 'typeorm';
 import { hash } from 'bcryptjs';
 
+import ResponseStatusException from '../errors/ResponseStatusException';
+
 import Usuario from '../models/Usuario';
 
 interface IRequest {
@@ -19,7 +21,7 @@ class UsuariosService {
         });
     
         if (usuarioJaCadastrado) {
-            throw new Error('Email ja utilizado');
+            throw new ResponseStatusException('Email ja utilizado');
         }
     
         const senhaCriptografada = await hash(senha, 8);
