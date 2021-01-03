@@ -1,6 +1,7 @@
 import { getRepository, useContainer } from 'typeorm';
 import { compare } from 'bcryptjs';
 import { sign } from 'jsonwebtoken';
+import config from 'config';
 
 import ResponseStatusException from '../errors/ResponseStatusException';
 
@@ -35,7 +36,7 @@ class SessaoService {
             throw new ResponseStatusException('Usuario e/ou senha invalidos', 401);
         }
 
-        const token = sign({}, 'bb757a278f392d128cf1157019d3d936', { 
+        const token = sign({}, config.get('App.auth.key'), { 
             subject: usuario.id,
             expiresIn: '1d'
         });        

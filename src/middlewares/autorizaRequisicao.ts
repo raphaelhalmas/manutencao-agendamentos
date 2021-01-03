@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import { verify } from 'jsonwebtoken';
+import config from 'config';
 
 import ResponseStatusException from '../errors/ResponseStatusException';
 
@@ -21,7 +22,7 @@ export default function autorizaRequisicao(
     const [, token ] = autorizacao.split(' ');
 
     try {
-        const decodedToken = verify(token, 'bb757a278f392d128cf1157019d3d936');
+        const decodedToken = verify(token, config.get('App.auth.key'));
         const { sub } = decodedToken as ITokenPayload;
 
         request.user = {
