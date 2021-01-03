@@ -2,6 +2,7 @@ import 'reflect-metadata';
 
 import express, { Request, Response, NextFunction } from 'express';
 import 'express-async-errors';
+import logger from './logger';
 
 import routes from './routes';
 import ResponseStatusException from './errors/ResponseStatusException';
@@ -22,7 +23,7 @@ const configureExpress = () => {
       });
     }
 
-    console.error(error);
+    logger.error(error);
 
     return response.status(500).json({
       status: 'error',
