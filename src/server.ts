@@ -1,7 +1,8 @@
 import setupApp from './app';
+import config from 'config';
 import logger from './logger';
 
-const port = 3333;
+const port = config.get('App.port');
 
 (async () => {
   try {

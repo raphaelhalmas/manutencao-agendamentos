@@ -1,0 +1,13 @@
+{
+  "App": {
+    "port": 3333,
+    "auth": {
+      "key": "bb757a278f392d128cf1157019d3d936",
+      "tokenExpiresIn": "1d"
+    },
+    "logger": {
+      "enabled": true,
+      "level": "info"
+    }
+  }
+}
