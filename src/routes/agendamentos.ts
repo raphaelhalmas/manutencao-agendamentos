@@ -3,7 +3,7 @@ import { getCustomRepository } from 'typeorm';
 import { Router } from 'express';
 import { parseISO } from 'date-fns';
 
-import AgendamentosReposirory from '../repositories/AgendamentosRepository';
+import AgendamentosRepository from '../repositories/AgendamentosRepository';
 import AgendamentosService from '../services/AgendamentosService';
 
 import autorizaRequisicao from '../middlewares/autorizaRequisicao';
@@ -26,7 +26,7 @@ agendamentosRouter.post('/', async (request, response) => {
 });
 
 agendamentosRouter.get('/', async (request, response) => {
-    const agendamentosRepository = getCustomRepository(AgendamentosReposirory);
+    const agendamentosRepository = getCustomRepository(AgendamentosRepository);
     const agendamentos = await agendamentosRepository.find();
     return response.json(agendamentos);
 });
